@@ -5,7 +5,8 @@ Supports X/O placement, move history with coordinates, and winning square animat
 
 ## Demo
 
-You can view the live demo [here](https://Ritupagar12.github.io/tic-tac-toe/) (replace with your GitHub Pages URL).
+You can view the live demo here: [Tic-Tac-Toe Demo](https://Ritupagar12.github.io/tic-tac-toe/)
+
 
 ## Features
 
