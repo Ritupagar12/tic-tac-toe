@@ -13,12 +13,19 @@ Play the game live here: 🌐 [Tic-Tac-Toe Live Demo](https://tic-tac-toe-sand-s
 ## 🕹️ Features
 
 - ✅ Classic Tic-Tac-Toe gameplay  
+- ✅ Optional **Play vs AI** mode with random moves  
 - ✅ Highlight winning line  
 - ✅ Undo / History moves  
 - ✅ Restart game anytime  
 - ✅ Smooth hover & click animations  
-- ✅ Fully responsive layout  
+- ✅ Fully responsive layout
 
+---
+
+## 🔮 Optional Enhancements
+- Let the player choose AI difficulty (Easy/Medium/Hard).
+- Add a toggle to play vs another human or AI.
+- Display messages like “AI is thinking...” with a slight delay for realism.
 ---
 
 ## ⚙️ Technologies Used
@@ -48,9 +55,3 @@ npm install
 npm run dev
 ```
 4. Open your browser at http://localhost:5173/ to play the game.
-
-## 💡 Project Insights
-- Uses React state to track moves and player turns
-- Implements highlighted winning combination for better UX
-- Designed with a mobile-first responsive layout using Tailwind
-- Animations and hover effects make the game engaging
