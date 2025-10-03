@@ -3,18 +3,25 @@ import { useState, useEffect } from "react";
 // Single square button
 function Square({ value, onSquareClick, highlight, disabled }) {
   const baseClasses =
-    "flex items-center justify-center w-20 h-20 text-3xl font-bold border border-gray-400 transition-transform duration-100 hover:scale-105";
-  const bg = highlight
-    ? "bg-green-200 text-green-800"
-    : value
-    ? "bg-gray-100 text-gray-800"
-    : "bg-white text-gray-800";
+    "flex items-center justify-center w-20 h-20 text-3xl font-bold border border-gray-400 transition-transform duration-150 hover:scale-105";
+  
+  let bg, textColor;
+  if (highlight) {
+    bg = "bg-green-200";
+    textColor = "text-green-800";
+  } else if (value) {
+    bg = "bg-gray-100";
+    textColor = value === "X" ? "text-red-600" : "text-blue-600";
+  } else {
+    bg = "bg-white";
+    textColor = "text-gray-800";
+  }
 
   return (
     <button
       onClick={onSquareClick}
       disabled={disabled || !!value}
-      className={`${baseClasses} ${bg} ${value ? "cursor-default" : "cursor-pointer"}`}
+      className={`${baseClasses} ${bg} ${textColor} ${value ? "cursor-default" : "cursor-pointer"}`}
     >
       {value}
     </button>
@@ -39,7 +46,7 @@ function Board({ xIsNext, squares, onPlay, aiEnabled }) {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="text-lg font-medium mb-3 text-gray-800">
+      <div className="text-lg font-medium mb-3">
         {winner
           ? `Winner: ${winner} 🎉`
           : isTie
@@ -48,7 +55,7 @@ function Board({ xIsNext, squares, onPlay, aiEnabled }) {
           ? "AI is thinking..."
           : `Next Player: ${xIsNext ? "X" : "O"}`}
       </div>
-      <div className="grid grid-cols-3 gap-1 bg-gray-700 p-1 rounded-md shadow-md">
+      <div className="grid grid-cols-3 gap-1 p-1 rounded-md shadow-md" style={{ backgroundColor: "#4B5563" }}>
         {squares.map((val, i) => (
           <Square
             key={i}
@@ -64,7 +71,7 @@ function Board({ xIsNext, squares, onPlay, aiEnabled }) {
 }
 
 // Main Game component
-export default function Game() {
+export default function App() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
   const [aiEnabled, setAiEnabled] = useState(false);
@@ -77,8 +84,8 @@ export default function Game() {
     setCurrentMove(nextHistory.length - 1);
   }
 
-  function jumpTo(nextMove) {
-    setCurrentMove(nextMove);
+  function jumpTo(move) {
+    setCurrentMove(move);
   }
 
   function resetGame() {
@@ -104,7 +111,10 @@ export default function Game() {
   }, [currentSquares, xIsNext, aiEnabled]);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10">
+    <div
+      className="min-h-screen flex flex-col items-center justify-start py-10"
+      style={{ background: "linear-gradient(to bottom right, #DBEAFE, #EDE9FE)" }}
+    >
       <h1 className="text-3xl font-bold mb-6 text-gray-900">🎮 Tic-Tac-Toe</h1>
 
       <div className="flex gap-10 flex-wrap justify-center">
@@ -128,7 +138,7 @@ export default function Game() {
               type="checkbox"
               checked={aiEnabled}
               onChange={(e) => setAiEnabled(e.target.checked)}
-              className="accent-green-500 w-5 h-5"
+              className="accent-indigo-500 w-5 h-5"
             />
             <span className="text-gray-800">Play vs AI</span>
           </label>
